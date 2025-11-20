@@ -11,4 +11,18 @@ class FirstController extends Controller
     {
         return "This response is from the First Controller Class";
     }
+
+    public function showAllUsers()
+    {
+        return [
+            "Ama",
+            "Kofi",
+            "Yaw"
+        ];
+    }
+
+    public function showOneUser()
+    {
+        return "Yaw";
+    }
 }
