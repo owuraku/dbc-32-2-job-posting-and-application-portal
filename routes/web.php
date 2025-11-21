@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirstController;
 use App\Http\Controllers\StudentController;
@@ -30,5 +31,7 @@ Route::get('/users/{id}/{name}/{age}', function (string $id, string $name, int $
 
 Route::resource('/cars', CarController::class);
 Route::resource('/students', StudentController::class);
+Route::resource('/companies', CompanyController::class);
+
 
 // Route::get('/cars/rent', [FirstController::class, 'index']);
