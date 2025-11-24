@@ -4,6 +4,8 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirstController;
+use App\Http\Controllers\JobApplicationController;
+use App\Http\Controllers\JobPostingController;
 use App\Http\Controllers\StudentController;
 
 Route::get('/', function () {
@@ -32,6 +34,10 @@ Route::get('/users/{id}/{name}/{age}', function (string $id, string $name, int $
 Route::resource('/cars', CarController::class);
 Route::resource('/students', StudentController::class);
 Route::resource('/companies', CompanyController::class);
+Route::resource('/job-postings', JobPostingController::class);
+Route::resource('/job-applications', JobApplicationController::class);
+
+
 
 
 // Route::get('/cars/rent', [FirstController::class, 'index']);
