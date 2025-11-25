@@ -13,15 +13,7 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        // $companyName = 'Ghana India -Kofi Annan Centre of Excellence in ICT';
-        $companyName = 'Ghana India -Kofi Annan Centre of Excellence in ICT';
-
-        // return $companies;
-        return view('companies.index', [
-            'company' => $companyName,
-            'age' => 10,
-            'registered' => false,
-            'listOfFruits' => ['Banana', 'Mango', 'Orange'],
+        return view('admin.companies.index', [
             'companies' => $companies
         ]);
     }

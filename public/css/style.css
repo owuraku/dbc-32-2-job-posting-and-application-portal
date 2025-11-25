@@ -1,0 +1,48 @@
+/* Custom CSS for Job Platform Layout */
+
+/* Loading Screen Styles */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white; /* Match the background of the main layout */
+    z-index: 1050; /* Above all other content */
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+    pointer-events: none; /* Allows clicks through after fading out */
+}
+
+/* Job Card Styling and Hover Animation */
+.job-card {
+    border-color: #dee2e6 !important; /* Default light border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+    position: relative; /* Needed for the absolute badge */
+}
+
+.job-card:hover {
+    /* Scale up slightly */
+    transform: translateY(-5px) scale(1.01);
+    /* Subtle shadow lift */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    /* Optional: Highlight border on hover with a primary color */
+    border-color: var(--bs-primary) !important;
+}
+
+/* Custom styling for the job card badges (Optional) */
+.job-type-badge {
+    font-size: 0.8em;
+    padding: 0.4em 0.8em;
+    border-radius: 0.25rem;
+}
+
+/* Ensure the navigation elements within the blue header look correct */
+header .nav-link {
+    font-weight: 500;
+}

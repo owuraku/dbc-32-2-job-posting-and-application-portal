@@ -1,0 +1,71 @@
+/* Global Admin Styles */
+
+#wrapper {
+    overflow-x: hidden;
+}
+
+/* Sidebar Styles */
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem; /* Hidden by default on small screens */
+    width: 15rem;
+    transition: margin 0.25s ease-out;
+    z-index: 1000;
+    /* Use Bootstrap primary color */
+    background-color: var(--bs-primary) !important;
+}
+
+/* Page Content Wrapper */
+#page-content-wrapper {
+    min-width: 100vw;
+    background-color: #f8f9fa; /* Light grey background for content */
+}
+
+/* Toggle Class for Sidebar (used by JS) */
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+/* Adjustments for Content when Sidebar is open */
+#wrapper.toggled #page-content-wrapper {
+    min-width: calc(100vw - 15rem);
+}
+
+/* Responsive adjustments for larger screens (md and up) */
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+    #wrapper.toggled #page-content-wrapper {
+        min-width: 100vw;
+    }
+}
+
+/* Sidebar List Item Customization */
+.list-group-flush .list-group-item-action {
+    color: white;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.list-group-flush .list-group-item-action:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* Custom Highlight for Active Sidebar Item */
+.list-group-item.bg-secondary.text-white {
+    background-color: #0d6efd; /* Darker blue to signify active */
+    border-left: 5px solid white !important;
+}
+
+/* Chart container height */
+.chart-area {
+    height: 300px; /* Standard height for dashboard charts */
+}
