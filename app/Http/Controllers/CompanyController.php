@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompanyCreateRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
@@ -23,13 +24,13 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return csrf_token();
+        return view('admin.companies.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CompanyCreateRequest $request)
     {
         // using save(): create an object, set properties and save the object
         // $company = new Company();
@@ -41,8 +42,9 @@ class CompanyController extends Controller
 
         // using create(): pass an array of properties to the create method
         $data = $request->all();
-        $company = Company::create($data);
-        return $company;
+        Company::create($data);
+        return redirect(route('admin.companies.index'));
+        // return $company;
     }
 
     /**

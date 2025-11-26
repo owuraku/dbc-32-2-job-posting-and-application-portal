@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobPostingController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', [HomeController::class, 'homepage']);
 
@@ -31,13 +32,20 @@ Route::get('/users/{id}/{name}/{age}', function (string $id, string $name, int $
 // Route::patch('/cars/{car}', [FirstController::class, 'index']);
 // Route::delete('/cars/{car}', [FirstController::class, 'index']);
 
-Route::resource('/cars', CarController::class);
-Route::resource('/students', StudentController::class);
-Route::resource('/companies', CompanyController::class);
-Route::resource('/job-postings', JobPostingController::class);
-Route::resource('/job-applications', JobApplicationController::class);
+// print(name: 'The', age: 20)
 
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+Route::prefix('/admin')->name('admin.')->group(function () {
+    Route::resource('/cars', CarController::class);
+    Route::resource('/students', StudentController::class);
+    Route::resource('/companies', CompanyController::class);
+    Route::resource('/job-postings', JobPostingController::class);
+    Route::resource('/job-applications', JobApplicationController::class);
+    Route::resource('/users', UserController::class);
+
+    // Route::resource(controller: JobApplicationController::class, name: '/job-applications');
+});
+
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
 
 

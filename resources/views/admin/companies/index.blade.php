@@ -5,7 +5,8 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 fw-bold text-primary">All Companies</h6>
-            <a href="add-job.html" class="btn btn-primary btn-sm"><i class="bi bi-plus me-1"></i> Add New Company</a>
+            <a href="{{ route('admin.companies.create') }}" class="btn btn-primary btn-sm"><i class="bi bi-plus me-1"></i> Add
+                New Company</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
