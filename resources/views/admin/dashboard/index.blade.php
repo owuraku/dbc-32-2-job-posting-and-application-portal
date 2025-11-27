@@ -13,7 +13,7 @@
                         <div class="col me-2">
                             <div class="text-xs fw-bold text-primary text-uppercase mb-1">Total Companies
                             </div>
-                            <div class="h5 mb-0 fw-bold text-gray-800">125</div>
+                            <div class="h5 mb-0 fw-bold text-gray-800">{{ $companies_count }}</div>
                         </div>
                         <div class="col-auto"><i class="bi bi-building text-primary fs-2 opacity-50"></i>
                         </div>

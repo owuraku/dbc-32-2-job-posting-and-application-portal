@@ -41,9 +41,11 @@ class CompanyController extends Controller
         // return $company;
 
         // using create(): pass an array of properties to the create method
-        $data = $request->all();
-        Company::create($data);
-        return redirect(route('admin.companies.index'));
+        $company = Company::create($request->validated());
+        return redirect(route('admin.companies.index'))->with('status', [
+            'message' => $company->name . ' created successfully',
+            'error' => false
+        ]);;
         // return $company;
     }
 
@@ -57,7 +59,10 @@ class CompanyController extends Controller
         // findOrFail($id) : fetch a record from the db with the specified id, throw a 404 error when not found
         // $c = Company::findOrFail($company);
         // return $c;
-        return $company;
+        return view('admin.companies.show', [
+            'company' => $company
+        ]);
+        // return $company;
     }
 
     /**
@@ -65,13 +70,16 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+
+        return view('admin.companies.edit', [
+            'company' => $company
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Company $company)
+    public function update(CompanyCreateRequest $request, Company $company)
     {
         // similar to create, only difference is no object is created (i.e new Company())
         // $company->name = $request->input('name');
@@ -81,8 +89,11 @@ class CompanyController extends Controller
         // return $company;
 
         // method 2
-        $company->update($request->all()); // supply an array of properties to update
-        return $company;
+        $company->update($request->validated()); // supply an array of properties to update
+        return redirect(route('admin.companies.index'))->with('status', [
+            'message' => $company->name . ' updated successfully',
+            'error' => false
+        ]);
 
         // method 3
     }

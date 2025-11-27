@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 
-@section('title', 'Add New Company')
+@section('title', 'Edit Company: ' . $company->name)
 
 @section('content')
     <div class="card shadow mb-4">
@@ -9,8 +9,8 @@
         </div>
         <div class="card-body">
             @include('admin.companies.form', [
-                'action' => route('admin.companies.store'),
-                // 'buttonText' => 'Create New',
+                'action' => route('admin.companies.update', $company->id),
+                'edit' => true,
             ])
         </div>
     </div>

@@ -27,10 +27,10 @@
                                 <td>{{ $company->contact }}</td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-outline-info btn-sm"><i
-                                                class="bi bi-eye"></i></button>
-                                        <button type="button" class="btn btn-outline-primary btn-sm"><i
-                                                class="bi bi-pencil"></i></button>
+                                        <a href="{{ route('admin.companies.show', $company->id) }}" type="button"
+                                            class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i></a>
+                                        <a href="{{ route('admin.companies.edit', $company->id) }}" type="button"
+                                            class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil"></i></a>
                                         <button type="button" class="btn btn-outline-danger btn-sm"><i
                                                 class="bi bi-trash"></i></button>
                                     </div>
