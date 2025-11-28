@@ -76,10 +76,11 @@
 
     <script>
         @session('status')
+        const isError = Boolean({{ isset($value['error']) && $value['error'] == true }})
         Swal.fire({
-            title: "{{ $value['error'] ? 'Error!' : 'Success' }}",
+            title: isError ? 'Error!' : 'Success',
             text: "{{ $value['message'] ?? 'Done' }}",
-            icon: "{{ $value['error'] ? 'error' : 'success' }}",
+            icon: isError ? 'error' : 'success',
             confirmButtonText: 'OK'
         })
         @endsession

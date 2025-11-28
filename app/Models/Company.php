@@ -19,4 +19,15 @@ class Company extends Model
         'address',
         'contact'
     ];
+
+    // define relationship with job posting
+    public function job_postings()
+    {
+        return $this->hasMany(JobPosting::class);
+    }
+
+    public function job_applications()
+    {
+        return $this->hasManyThrough(JobApplication::class, JobPosting::class);
+    }
 }

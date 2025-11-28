@@ -104,8 +104,8 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
-        return [
-            "message" => "Company $company->name has been deleted successfully"
-        ];
+        return redirect(route('admin.companies.index'))->with('status', [
+            'message' => "Company $company->name has been deleted successfully",
+        ]);
     }
 }

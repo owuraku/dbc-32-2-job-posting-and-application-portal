@@ -47,12 +47,12 @@
                             <tbody>
                                 <tr>
                                     <td>Number of Job Postings</td>
-                                    <td class="fw-bold">45</td>
-                                    <td>5 New Postings</td>
+                                    <td class="fw-bold">{{ $company->job_postings->count() }}</td>
+                                    <td>0 New Postings</td>
                                 </tr>
                                 <tr>
                                     <td>Total Applications Received</td>
-                                    <td class="fw-bold">2,150</td>
+                                    <td class="fw-bold">{{ $company->job_applications->count() }}</td>
                                     <td>288 Applications</td>
                                 </tr>
                                 <tr>
