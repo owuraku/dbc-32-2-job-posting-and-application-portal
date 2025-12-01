@@ -26,7 +26,10 @@
                         <a class="nav-link btn btn-light text-primary mx-2 rounded-2 px-3 py-2" href="#">Home</a>
                         <a class="nav-link text-white mx-2 px-3 py-2" href="#">Post A Job</a>
                         <a class="nav-link text-white mx-2 px-3 py-2" href="#">Find Jobs</a>
-                        <a class="nav-link text-white mx-2 px-3 py-2" href="#">Login</a>
+                        @guest
+                            <a class="nav-link text-white mx-2 px-3 py-2"
+                                href="{{ route('auth.login.page') }}">Register/Login</a>
+                        @endguest
                     </div>
                 </nav>
             </div>

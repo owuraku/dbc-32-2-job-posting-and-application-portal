@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mainContent.style.opacity = 1;
             }, 50);
 
-        }, 500); // Must match the CSS transition time for fade-out (0.5s)
+        }, 300); // Must match the CSS transition time for fade-out (0.5s)
 
-    }, 1500); // Delay before the loading screen starts to disappear (1.5s)
+    }, 800); // Delay before the loading screen starts to disappear (1.5s)
 });
