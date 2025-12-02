@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CompanyController;
+use App\Mail\WelcomeEmail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirstController;
 use App\Http\Controllers\HomeController;
@@ -11,8 +12,16 @@ use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobPostingController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Mail;
 
 Route::get('/', [HomeController::class, 'homepage']);
+
+// Route::get('/email', function () {
+//     $mail = new WelcomeEmail('Owura', 'https://gi-kace.gov.gh');
+//     Mail::to('seth.gyekye-boateng@gi-kace.gov.gh')->send($mail);
+//     return ['message' => 'Message sent successfully'];
+// });
+
 
 Route::get('/home', function () {
     return "This is the homepage";
@@ -52,6 +61,8 @@ Route::prefix('/auth')->name('auth.')->controller(AuthController::class)->middle
     function () {
         Route::get('login', 'loginPage')->name('login.page');
         Route::get('register', 'registrationPage')->name('register.page');
+        Route::get('verify-email/{email}/{hash}', 'verifyEmail')->name('verify.email');
+
 
         Route::post('register', 'register')->name('register');
         Route::post('login', 'login')->name('login');
