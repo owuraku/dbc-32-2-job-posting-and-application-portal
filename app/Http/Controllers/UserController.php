@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -60,5 +63,31 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function profile()
+    {
+        $currentUser = Auth::user();
+        // dump($currentUser);
+        // dd($currentUser);
+        return view('users.profile');
+    }
+
+    public function profileUpdate(UpdateProfile $request)
+    {
+        $data = $request->validated();
+        // save file if it exists
+        if ($request->hasFile('cv_path')) {
+            $path = $request->file('cv_path')->store('cvs');
+            $data['cv_path'] = $path;
+
+            // delete old file if exists
+            $oldFile = Auth::user()->cv_path;
+            if ($oldFile) {
+                Storage::delete($oldFile);
+            }
+        }
+        Auth::user()->update($data);
+        return redirect(route('profile'));
     }
 }

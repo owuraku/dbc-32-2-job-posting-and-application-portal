@@ -14,7 +14,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Mail;
 
-Route::get('/', [HomeController::class, 'homepage']);
+Route::get('/', [HomeController::class, 'homepage'])->middleware('cv_uploaded');
 
 // Route::get('/email', function () {
 //     $mail = new WelcomeEmail('Owura', 'https://gi-kace.gov.gh');
@@ -43,6 +43,15 @@ Route::get('/users/{id}/{name}/{age}', function (string $id, string $name, int $
 // Route::delete('/cars/{car}', [FirstController::class, 'index']);
 
 // print(name: 'The', age: 20)
+
+Route::middleware('auth')->group(function () {
+    Route::get('/user/profile', [UserController::class, 'profile'])->name('profile');
+    Route::patch('/user/profile', [UserController::class, 'profileUpdate'])->name('profile.update');
+});
+
+
+
+
 
 Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('/cars', CarController::class);

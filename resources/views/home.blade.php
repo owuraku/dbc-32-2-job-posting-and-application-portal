@@ -30,6 +30,9 @@
                             <a class="nav-link text-white mx-2 px-3 py-2"
                                 href="{{ route('auth.login.page') }}">Register/Login</a>
                         @endguest
+                        @auth
+                            <a class="nav-link text-white mx-2 px-3 py-2" href="{{ route('profile') }}">Profile</a>
+                        @endauth
                     </div>
                 </nav>
             </div>
