@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegisterRequest;
 use App\Mail\WelcomeEmail;
 use App\Models\User;
+use App\Services\SendSMS;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,8 @@ class AuthController extends Controller
 
         $mail = new WelcomeEmail($user->fullname, $verifyUrl);
         Mail::to($user->email)->send($mail);
+
+        SendSMS::send($user->contact, "Hi $user->fullname, \nThank you for registering with us. Enjoy your stay");
 
         return redirect('/');
     }
