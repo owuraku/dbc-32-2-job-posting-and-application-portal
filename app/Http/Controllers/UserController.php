@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProfile;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -14,6 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        $users = User::all();
+        return view('admin.users.index', [
+            'users' => $users
+        ]);
         //
     }
 
@@ -44,17 +50,35 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        return view('admin.users.edit', [
+            'user' => $user,
+            'roles' => $roles
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $data = $request->validate([
+            'role' => ['sometimes', 'exists:roles,id']
+        ]);
+
+        if (Auth::user()->can('roles.assign')) {
+            $role = Role::findById($data['role']);
+            $user->syncRoles($role);
+            $message = "User $user->fullname, edited successfully";
+        } else {
+            $message = "User $user->fullname, edited successfully but role not updated";
+        }
+
+        return redirect(route('admin.users.index'))->with('status', [
+            'message' => $message
+        ]);
     }
 
     /**

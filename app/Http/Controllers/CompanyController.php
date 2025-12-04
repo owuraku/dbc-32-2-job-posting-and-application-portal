@@ -5,14 +5,29 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CompanyCreateRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class CompanyController extends Controller
+class CompanyController extends Controller implements HasMiddleware
 {
+
+    public static function middleware()
+    {
+        return [
+            new Middleware('permission:companies.read', only: ['index']),
+            new Middleware('permission:companies.create', only: ['create', 'store']),
+            new Middleware('permission:companies.update', only: ['edit', 'update']),
+            new Middleware('permission:companies.delete', only: ['destroy']),
+        ];
+    }
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+
         $companies = Company::all();
         return view('admin.companies.index', [
             'companies' => $companies
