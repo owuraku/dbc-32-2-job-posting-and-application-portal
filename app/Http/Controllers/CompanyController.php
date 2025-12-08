@@ -14,10 +14,10 @@ class CompanyController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('permission:companies.read', only: ['index']),
-            new Middleware('permission:companies.create', only: ['create', 'store']),
-            new Middleware('permission:companies.update', only: ['edit', 'update']),
-            new Middleware('permission:companies.delete', only: ['destroy']),
+            // new Middleware('permission:companies.read', only: ['index']),
+            // new Middleware('permission:companies.create', only: ['create', 'store']),
+            // new Middleware('permission:companies.update', only: ['edit', 'update']),
+            // new Middleware('permission:companies.delete', only: ['destroy']),
         ];
     }
 
@@ -25,13 +25,14 @@ class CompanyController extends Controller implements HasMiddleware
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $companies = Company::all();
-        return view('admin.companies.index', [
-            'companies' => $companies
-        ]);
+        return $request->expectsJson() ? $companies :
+            view('admin.companies.index', [
+                'companies' => $companies
+            ]);
     }
 
     /**
@@ -57,10 +58,10 @@ class CompanyController extends Controller implements HasMiddleware
 
         // using create(): pass an array of properties to the create method
         $company = Company::create($request->validated());
-        return redirect(route('admin.companies.index'))->with('status', [
+        return $request->expectsJson() ? $company : redirect(route('admin.companies.index'))->with('status', [
             'message' => $company->name . ' created successfully',
             'error' => false
-        ]);;
+        ]);
         // return $company;
     }
 

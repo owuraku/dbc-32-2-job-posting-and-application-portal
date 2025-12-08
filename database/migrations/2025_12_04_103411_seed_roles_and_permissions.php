@@ -55,16 +55,20 @@ return new class extends Migration
 
 
         // create a super admin user
-        $superAdminUser = User::create([
-            'fullname' => 'Super Admin',
-            'email' => env('SUPER_ADMIN_EMAIL'),
-            'password' => env('SUPER_ADMIN_PASSWORD'),
-            'contact' => '0200000000',
-            'address' => 'Online',
-            'email_verified_at' => now()
-        ]);
-
-        $superAdminUser->assignRole($superAdminRole);
+        try {
+            //code...
+            $superAdminUser = User::createOrFirst([
+                'fullname' => 'Super Admin',
+                'email' => env('SUPER_ADMIN_EMAIL'),
+                'password' => env('SUPER_ADMIN_PASSWORD'),
+                'contact' => '0200000000',
+                'address' => 'Online',
+                'email_verified_at' => now()
+            ]);
+            $superAdminUser->assignRole($superAdminRole);
+        } catch (\Throwable $th) {
+            print('User not added');
+        }
     }
 
     /**
