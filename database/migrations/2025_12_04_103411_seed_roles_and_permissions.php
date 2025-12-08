@@ -63,8 +63,9 @@ return new class extends Migration
                 'password' => env('SUPER_ADMIN_PASSWORD'),
                 'contact' => '0200000000',
                 'address' => 'Online',
-                'email_verified_at' => now()
             ]);
+            $superAdminUser->email_verified_at = now();
+            $superAdminUser->save();
             $superAdminUser->assignRole($superAdminRole);
         } catch (\Throwable $th) {
             print('User not added');
